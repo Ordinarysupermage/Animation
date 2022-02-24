@@ -9,8 +9,13 @@ ON O2 = new ON( -1000, 395);
 Start S = new Start( 2000, 550);
 Target T = new Target( -1000, 350);
 Airport A = new Airport( 2000, 2000);
+Dialog D = new Dialog( 5000, 5000);
 int timer = 0;
 int timer2= 0;
+int timer3= 0;
+int signal1 = 0;
+int signal2= 0;
+int signal3= 0;
 PImage load;
 PImage Target;
 PImage Airport;
@@ -33,6 +38,7 @@ void draw() {
   S.draw();
   A.draw();
   T.draw();
+  D.draw();
 }
 
 
@@ -47,7 +53,7 @@ class Mode1 {
   public void draw() {
     stroke(#ED2C1A);
     fill(#ED2C1A);
-    rect( xpos, ypos, 350, 50);
+    rect( xpos, ypos, 420, 50);
     if ( timer > 150) {
       xpos = -1000;
     }
@@ -82,7 +88,7 @@ class Mode2 {
   public void draw() {
     stroke(#12FF5B);
     fill(#12FF5B);
-    rect( xpos, ypos, 350, 50);
+    rect( xpos, ypos, 420, 50);
     if (timer > 150) {
       xpos = 250;
     }
@@ -188,6 +194,52 @@ class Airport {
   }
 }
 
+class Dialog {
+  int xpos, ypos, xpos1, ypos1, xpos2, ypos2;
+  
+  public Dialog( int x, int y) {
+    xpos = x;
+    ypos = y;
+    xpos1 = -1000;
+    ypos1= 0;
+    xpos2 = -1000;
+    ypos2 = 0;
+  }
+  
+  public void draw() {
+    textSize( 20);
+    text( "Ready for battle soldier?", xpos, ypos);
+    if ( timer2 > 99) {
+      xpos = 235;
+      ypos = 700;
+      timer3 = timer3 + 1;
+    }
+    if ( timer3 > 50) {
+      xpos = -1000;
+      ypos = 0;
+    }
+    text( "That airport is the enemy's command center" , xpos1, ypos1);
+    if ( timer3 > 50) {
+      xpos1 = 225;
+      ypos1 = 700;
+    }
+    if ( timer3 > 150) {
+      xpos1 = -1000;
+      ypos1 = 0;
+    }
+    text( "Take it down!" , xpos2, ypos2);
+    if ( timer3 > 150) {
+      xpos2 = 350;
+      ypos2 = 700;
+    }
+    if (timer3 > 200) {
+      xpos2 = -1000;
+      ypos2 = 0;
+      signal1 = 100;
+    }
+  }
+}
+
 class Target {
   int xpos, ypos;
   
@@ -197,7 +249,7 @@ class Target {
   }
   public void draw() {
     image( Target, xpos, ypos, 100, 100);
-    if ( timer2 > 99) {
+    if ( signal1 > 99) {
     xpos = 350;
     ypos = 350;
     }
